@@ -1,11 +1,9 @@
 part of 'counter_bloc.dart';
 
-//write the events that is going to happen;
-
-//two events 1 incrimant and decriment;
-@immutable
-abstract class CounterEvent {}
-
-
-class Incriment extends CounterEvent{}
-class Decriment extends CounterEvent{}
+@freezed
+class CounterEvent with _$CounterEvent {
+  //.incriment should have the same name as Incriment
+  const factory CounterEvent.incriment() = Incriment;
+  const factory CounterEvent.decriment() = Decriment;
+  
+}
