@@ -1,24 +1,19 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'counter_event.dart';
 part 'counter_state.dart';
+part 'counter_bloc.freezed.dart';
 
-//the initial value is 0 .. by initialstate
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  CounterBloc() : super(InitialState()) {
-    //!on : Its a function its telling what to do during incriment
+  CounterBloc() : super(CounterState.initial()) {
     on<Incriment>((event, emit) {
-      final currentSatate = state.count;
-      final incrimentState = currentSatate + 1;
-   return   emit(CounterState(count:  incrimentState));
-
-      // return emit(CounterState(count: state.count + 1));
+      return emit(state.copyWith(count: state.count + 1));
     });
-    //!on : Its a function its telling what to do during Decriment
 
     on<Decriment>((event, emit) {
-      return emit(CounterState(count: state.count - 1));
+      //final newState = state.copyWith(
+      return emit(state.copyWith(count: state.count - 1));
     });
   }
 }
